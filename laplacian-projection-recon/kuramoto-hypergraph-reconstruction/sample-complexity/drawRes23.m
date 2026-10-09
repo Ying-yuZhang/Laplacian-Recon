@@ -29,7 +29,7 @@ colors = {
 color_H = [0.85, 0.45, 0.15]; % 焦糖橙 (理论边界线)
 
 % ================= 3. 开始绘图 =================
-figure('Color', 'w', 'Position', [100, 100, 600, 450]);
+figure('Color', 'w', 'Position', [100, 100, 550, 450]);
 hold on; box on;
 plot_handles = []; % 动态收集有效图例的句柄
 
@@ -74,7 +74,7 @@ plot_handles = [h_N, h_H]; % 将理论线加入图例
 ax = gca;
 % 【修改点 1：坐标轴刻度放大、加粗、颜色设为纯黑】
 ax.LineWidth = 1.5;             % 边框略微加粗，压住深色字
-ax.FontSize = 14;               % 字体调大 (从 12 调至 14)
+ax.FontSize = 16;               % 字体调大 (从 12 调至 14)
 ax.FontWeight = 'bold';         % 字体加粗
 ax.XColor = 'k';                % X轴刻度颜色设为纯黑
 ax.YColor = 'k';                % Y轴刻度颜色设为纯黑
@@ -87,7 +87,7 @@ xlim([min(N_list)-2, max(N_list)+2]);
 
 % 【修改点 2：图例字体放大、加粗、颜色设为纯黑】
 lgd = legend(plot_handles, 'Location', 'northwest', 'Box', 'off'); 
-lgd.FontSize = 13;              % 图例字体调大 (从 11 调至 13)
+lgd.FontSize = 16;              % 图例字体调大 (从 11 调至 13)
 lgd.FontWeight = 'bold';        % 图例字体加粗
 lgd.TextColor = 'k';            % 图例文字设为纯黑
 

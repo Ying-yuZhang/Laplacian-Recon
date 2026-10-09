@@ -3,7 +3,7 @@ idlen=size(name,1);
 % perfor=zeros(9,5,idlen,5);
 rng(42);
 
-for l=4:5
+for l=1:5
     for id=1:idlen
         eval(['load ',strtrim(name(id,:)),'_A_',num2str(l),'.mat A'])% 邻接矩阵
         eval(['load ',strtrim(name(id,:)),'_B_',num2str(l),'.mat B'])% 高阶交互，2-单纯形

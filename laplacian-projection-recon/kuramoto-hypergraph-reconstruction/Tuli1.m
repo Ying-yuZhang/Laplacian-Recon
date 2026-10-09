@@ -15,15 +15,7 @@ rng(42);
 
 perfor = zeros(9,5,100,5);
 
-% delta = 0.2;%驱动大小
-% % [U, ~, V] = svd(rand(N)); % 进S行奇异值分解
-% di = diag(0.5 + rand(1, N)); % 生成非零奇异值，确保矩阵满秩
-% I = U * di * V'; % 重构满秩矩阵
-% % 获取矩阵 I 的最小值和最大值
-% I_min = min(I(:));
-% I_max = max(I(:));
-% % 将 I 的值映射到 [0, delta] 范围
-% I = 0 + (I - I_min) * (delta - 0) / (I_max - I_min);
+
 
 irange = unique(round(logspace(log10(3), log10(2000), 30)));
 

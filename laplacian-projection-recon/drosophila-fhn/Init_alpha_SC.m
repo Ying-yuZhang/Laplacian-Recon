@@ -9,7 +9,7 @@ function alpha = Init_alpha_SC(X_score,order,cut)
 X=X_score(find(X_score>cut));
 
 % 定义直方图的边界和获取频率
-edges = 0:0.05:2; % 自定义边界，细粒度
+edges = 0:0.05:20; % 自定义边界，细粒度
 [counts, edges] = histcounts(X, 'BinEdges', edges);
 
 % 找到峰值（局部最大值）
@@ -32,6 +32,11 @@ else
 end
 
 alpha=peak_positions;
+
+kk=2;
+if order>kk
+alpha=0.1*ones(order,1);
+end
 % disp(alpha);
 end
 

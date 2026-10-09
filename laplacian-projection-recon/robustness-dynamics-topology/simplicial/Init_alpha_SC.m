@@ -32,6 +32,11 @@ else
 end
 
 alpha=peak_positions;
+
+kk=2;
+if order>kk
+alpha=0.1*ones(order,1);
+end
 % disp(alpha);
 end
 

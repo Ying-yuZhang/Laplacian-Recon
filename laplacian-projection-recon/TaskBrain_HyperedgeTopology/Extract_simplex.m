@@ -19,15 +19,17 @@ for ite = 1:ite_num
     XX = X_score;
     extracted_simplices = cell(1, order); % 用元胞数组存储每一阶的单纯形列表
     K_tmp_all = cell(1, order);           % 存储每一阶向底层图投影的边权重贡献
+    K_tmp_all{1} = sparse(double(A_estimate));
 
     for d = 2:order
-        XX = XX - alpha(d-1, ite);
-        X_num = XX;
-        facd = factorial(d-1);
+        % R_d = X_score - sum_{r<d} alpha(r,ite) * K_tmp_all{r}。
+        XX = XX - alpha(d-1, ite) * K_tmp_all{d-1};
+        X_num = XX; % 当前阶剥离副本；不写回 XX，避免下一阶重复扣除。
 
         % ---------------------------------------------------------
         % 仅在底层有效边构成的稀疏图中寻找大小为 d+1 的完全子图
-        Adj_init = sparse(X_num > delta);
+        % 候选必须属于已恢复骨架，避免 delta < cut 时弱边进入候选。
+        Adj_init = sparse((X_num > delta) & A_estimate);
         Adj_init = Adj_init | Adj_init';
         Adj_init = Adj_init - diag(diag(Adj_init));
 
@@ -118,7 +120,7 @@ for ite = 1:ite_num
             valid_cands(best_cand_idx) = false; % 移出候选池
 
             % 更新底层边权重 X_num
-            subtract_val = alpha(d, ite) / facd;
+            subtract_val = alpha(d, ite);
             for e_idx = 1:num_edges_per_simplex
                 n1 = best_cand(edge_subs(e_idx, 1));
                 n2 = best_cand(edge_subs(e_idx, 2));
@@ -164,12 +166,13 @@ for ite = 1:ite_num
     x_filt = x(C_id);
 
     al = (C_filt' * C_filt + 1e-6 * eye(size(C_filt, 2))) \ (C_filt' * x_filt);
-
-    if any(al <= 0)
-        disp('alpha为负');
-        disp(al);
-        break;
-    end
+    % al = (C_filt' * C_filt ) \ (C_filt' * x_filt);
+    % if any(al <= 0)
+    %     disp('alpha为负');
+    %     disp(al);
+    %     break;
+    % end
+    al(al<=0)=0.01;
     alpha(:, ite + 1) = al;
 end
 
@@ -190,7 +193,7 @@ end
 out.A2_estimate = A2_estimate;
 
 % 使用动态字段名输出，输出标准的 S x (d+1) 节点表
-for d = 3:order
+for d = 2:order
     field_name = sprintf('A%d_simplex_list', d);
     out.(field_name) = extracted_simplices{d};
 end

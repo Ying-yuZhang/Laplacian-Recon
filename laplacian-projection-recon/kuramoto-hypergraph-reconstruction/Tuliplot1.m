@@ -58,7 +58,7 @@ for i = 1
     set(ax, 'XScale', 'log');
     xlim([x_min_r, x_max_r]); 
     
-    % [修改点] 调整坐标轴的字体大小和颜色
+    % 调整坐标轴的字体大小和颜色
     ax.Box = 'on';
     ax.LineWidth = 1.5;             % 稍微加粗一点边框，配合深色字体
     ax.FontSize = 16;               % 将字体调大 (原为 11)

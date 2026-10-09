@@ -40,7 +40,7 @@ highlight_r = irange(pnum_list) / N; % M值对应的比率位置
 shadow_color = [0.2, 0.6, 0.4]; 
 
 % 刻度设置 (原始 M 值 -> 转换为 M/N)
-tick_values_M = [3, 10, 30, 100, 300, 600, 1000]; 
+tick_values_M = [3, 10, 30, 100, 300, 1000]; 
 tick_values_r = tick_values_M / N;
 
 %% 2. 9幅独立绘图循环
@@ -72,9 +72,13 @@ for i = 3
     set(ax, 'XScale', 'log');
     xlim([x_min_r, x_max_r]); 
     
+    % 调整坐标轴的字体大小和颜色
     ax.Box = 'on';
-    ax.LineWidth = 1.3;
-    ax.FontSize = 11;
+    ax.LineWidth = 1.5;             % 稍微加粗一点边框，配合深色字体
+    ax.FontSize = 16;               % 将字体调大 (原为 11)
+    ax.FontWeight = 'bold';         % 字体加粗，显得颜色更深更实
+    ax.XColor = 'k';                % X轴刻度及数字设为纯黑
+    ax.YColor = 'k';                % Y轴刻度及数字设为纯黑
     ax.TickDir = 'in';
     
     % Y 轴范围自适应 (防止 F1 或 AUPR 挤在一起)
@@ -124,7 +128,7 @@ for i = 3
     % (可选) 如果你希望读者知道这是 M 值，可以将 xlabel 改为：
     % xlabel('M', 'FontSize', 12, 'FontWeight', 'bold');
     % 图例 (仅在每个区域的第一个图或所有图中显示)
-    lgd = legend('Location', 'southwest', 'FontSize', 9);
+    lgd = legend('Location', 'southwest', 'FontSize', 16);
     lgd.EdgeColor = 'none';
     
     hold off;

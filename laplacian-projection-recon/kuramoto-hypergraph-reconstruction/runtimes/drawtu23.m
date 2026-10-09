@@ -36,7 +36,7 @@ else
 end
 
 % ================= 3. 绘制主图 =================
-fig = figure('Color', 'w', 'Position', [100, 100, 600, 500]); 
+fig = figure('Color', 'w', 'Position', [100, 100, 650, 500]); 
 ax_main = axes(fig, 'Position', [0.10, 0.12, 0.85, 0.72]); 
 hold(ax_main, 'on'); box(ax_main, 'on');
 h_2nd = gobjects(1, 5); % 预分配 2-order 句柄数组
@@ -85,7 +85,7 @@ xtickangle(ax_main, 45);
 
 % ---> 【坐标轴修改点：字体变大、加粗、颜色设纯黑】 <---
 ax_main.LineWidth = 1.5;             % 略微加粗边框以匹配深色字体
-ax_main.FontSize = 14;               % 将刻度字体从 12 调大到 14
+ax_main.FontSize = 16;               % 将刻度字体从 12 调大到 14
 ax_main.FontWeight = 'bold';         % 刻度字体加粗，显得颜色更深
 ax_main.XColor = 'k';                % 强制 X轴 颜色为纯黑
 ax_main.YColor = 'k';                % 强制 Y轴 颜色为纯黑
@@ -97,7 +97,7 @@ ax_main.TickLength = [0.015, 0.015];
 % leg.Box = 'off';
 
 % ---> 【字体变大、加粗、文字设纯黑】 <---
-leg.FontSize = 10;                   % 将图例字体从 10 调大到 12
+leg.FontSize = 16;                   % 将图例字体从 10 调大到 12
 leg.FontWeight = 'bold';             % 图例字体加粗
 leg.TextColor = 'k';                 % 强制图例文字为纯黑
 leg.ItemTokenSize = [15, 10]; 
